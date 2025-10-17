@@ -3,48 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curiosity Quiz</title>
+    <title>Curiosity Compass</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
-    <div class="app-container">
-        <!-- Start Screen -->
-        <div id="start-screen">
-            <h1 class="screen-title">Curiosity Quiz</h1>
-            <p class="subtitle">What are you curious about today?</p>
-            <form id="topic-form">
-                <input type="text" id="topic-input" class="input-field" placeholder="e.g., The Roman Empire">
-                <button type="submit" id="start-btn" class="btn btn-primary">Start Quiz</button>
-            </form>
+    <div id="quiz-container">
+        <header>
+            <h1>Curiosity Compass</h1>
+            <p>Your AI-powered learning guide</p>
+        </header>
+        <div id="chat-box">
+            <!-- Quiz messages will be appended here -->
         </div>
-
-        <!-- Quiz Screen -->
-        <div id="quiz-screen" class="hidden">
-            <div class="quiz-header">
-                <h2 id="question-number">Question 1 of 5</h2>
-                <button id="end-quiz-btn" class="btn btn-secondary small-btn">End Quiz</button>
-            </div>
-            <p id="question-text" class="question-text">Loading question...</p>
-            <div id="options-grid" class="options-grid"></div>
-            <button id="submit-btn" class="btn btn-primary" style="margin-top: 1.5rem;" disabled>Submit</button>
-            <div id="explanation" class="explanation hidden"></div>
-            <button id="next-btn" class="btn btn-primary hidden" style="margin-top: 1.5rem;">Next Question</button>
+        <div id="input-container">
+            <input type="text" id="user-input" placeholder="Tell me what you're curious about...">
+            <button id="send-btn">Send</button>
         </div>
-
-        <!-- Summary Screen -->
-        <div id="summary-screen" class="hidden">
-            <h1 class="screen-title">Quiz Summary</h1>
-            <div id="summary-content" class="summary-content">
-                <p class="loading-text">Analyzing your results...</p>
-            </div>
-            <div class="v2-options">
-                <button class="btn btn-secondary">Dig Deeper (V2)</button>
-                <button id="restart-btn" class="btn btn-primary">Start a New Quiz</button>
-            </div>
+        <div id="options-container" class="hidden">
+             <button class="option-btn" onclick="location.reload()">Start a New Chat</button>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
