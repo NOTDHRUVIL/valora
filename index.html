@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curiosity Compass</title>
+    <title>Curiosity Compass v2</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -11,17 +11,18 @@
     <div id="quiz-container">
         <header>
             <h1>Curiosity Compass</h1>
-            <p>Your AI-powered learning guide</p>
+            <p>An Adaptive Learning Engine</p>
         </header>
         <div id="chat-box">
             <!-- Quiz messages will be appended here -->
         </div>
         <div id="input-container">
-            <input type="text" id="user-input" placeholder="Tell me what you're curious about...">
+            <input type="text" id="user-input" placeholder="What are you curious about?">
             <button id="send-btn">Send</button>
         </div>
         <div id="options-container" class="hidden">
-             <button class="option-btn" onclick="location.reload()">Start a New Chat</button>
+             <button id="explore-btn" class="option-btn">Explain This Concept</button>
+             <button class="option-btn" onclick="location.reload()">Start New Quiz</button>
         </div>
     </div>
     <script src="script.js"></script>
