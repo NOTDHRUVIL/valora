@@ -1,10 +1,12 @@
+// 🚨 DANGER 🚨
+// This API key is visible to anyone who views your site.
+// This is okay for a short-term hackathon demo, but you must
 // disable this key after the event is over.
-const PERPLEXITY_API_KEY = "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";
+const PERPLEXITY_API_KEY = "pplx-..."; // <--- ⚠️ PASTE YOUR API KEY HERE
 
 const API_URL = 'https://api.perplexity.ai/chat/completions';
 
 // --- State Management ---
-let gameState = 'start';
 let topic = '';
 let history = [];
 let currentQuestion = null;
@@ -95,9 +97,10 @@ function renderQuestion() {
         button.textContent = option;
         button.dataset.index = index;
         button.onclick = () => {
-            if (submitBtn.disabled) return;
+            // FIX 1: Removed the incorrect check that was blocking clicks.
+            // The correct way to prevent clicks is to disable the buttons,
+            // which now happens in handleSubmitAnswer.
             selectedOptionIndex = index;
-            // Visually mark selection
             document.querySelectorAll('.option-btn').forEach(btn => btn.classList.remove('selected'));
             button.classList.add('selected');
             submitBtn.disabled = false;
@@ -138,9 +141,9 @@ async function handleNextQuestion() {
         return;
     }
 
-    // Reset UI for next question
     nextBtn.classList.add('hidden');
     explanationEl.classList.add('hidden');
+    submitBtn.classList.remove('hidden'); // Show submit button again
     submitBtn.disabled = true;
     questionTextEl.textContent = "Generating next question...";
     optionsGridEl.innerHTML = '';
@@ -179,8 +182,11 @@ async function handleEndQuiz() {
 }
 
 function handleSubmitAnswer() {
-    submitBtn.disabled = true;
+    submitBtn.classList.add('hidden'); // Hide submit, show next
+
+    // FIX 2: Explicitly disable all option buttons after submitting.
     document.querySelectorAll('.option-btn').forEach(btn => {
+        btn.disabled = true; 
         const index = parseInt(btn.dataset.index);
         if (index === currentQuestion.correct_option_index) {
             btn.classList.add('correct');
@@ -193,7 +199,6 @@ function handleSubmitAnswer() {
     explanationEl.classList.remove('hidden');
     nextBtn.classList.remove('hidden');
     
-    // Add to history
     const turnData = {
         ...currentQuestion,
         userAnswer: currentQuestion.options[selectedOptionIndex],
@@ -214,6 +219,7 @@ function handleRestart() {
     topicInput.value = '';
     summaryContentEl.innerHTML = '<p class="loading-text">Analyzing your results...</p>';
     nextBtn.textContent = "Next Question";
+    submitBtn.classList.remove('hidden');
     showScreen('start');
 }
 
